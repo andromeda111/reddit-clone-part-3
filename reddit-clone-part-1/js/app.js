@@ -8,14 +8,14 @@ angular.module('app', [])
         vm.posts = []
       }
 
-      vm.createNewPost = function () {
+      vm.createNewPost = function (e) {
+        e.preventDefault()
         vm.newPost.posted = new Date()
         vm.newPost.votes = 0
         vm.newPost.comments = []
         vm.posts.push(vm.newPost)
-
         delete vm.newPost
-        return
+        vm.newPostForm = false
       }
 
       vm.addComment = function (post) {

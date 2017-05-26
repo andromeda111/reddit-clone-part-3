@@ -18,45 +18,61 @@
 <main class="container">
 
   <div class="pull-right">
-    <p><button class="btn btn-info" ng-click="newPost=!newPost">New Post</button></p>
+    <p><button class="btn btn-info" ng-click="$ctrl.newPostForm=!$ctrl.newPostForm">New Post</button></p>
   </div>
 
   <ul class="nav nav-pills">
     <li role="presentation" class="active">
-      <input type="search" class="form-control input-sm search-form" placeholder="Filter">
+      <input type="search" class="form-control input-sm search-form" ng-model="$ctrl.filter" placeholder="Filter">
     </li>
     <div class="form-inline">
       <label for="sort">  Sort by </label>
       <select class="form-control" id="sort" ng-model="$ctrl.sort">
         <option value="votes">Votes</option>
-        <option value="date">Date</option>
-        <option value="time">Time</option>
+        <option value="posted">Date</option>
+        <option value="title">Title</option>
       </select>
     </div>
   </ul>
 
-  <div class="row" ng-show="newPost">
+  <div class="row" ng-if="$ctrl.newPostForm">
     <div class="col-md-8">
 
-      <form ng-submit="$ctrl.createNewPost()">
-        <div>
+      <form novalidate name="$ctrl.newForm" ng-submit="$ctrl.createNewPost($event)">
+        <div ng-class="{
+          'has-error': $ctrl.newForm.title.$invalid &&
+            $ctrl.newForm.title.$touched,
+          'has-success': $ctrl.newForm.title.$valid,
+        }">
           <label for="title">Title</label>
-          <input id="title" class="form-control" ng-model="$ctrl.newPost.title">
+          <input id="title" name="title" class="form-control" required ng-minlength="3" ng-model="$ctrl.newPost.title">
         </div>
-        <div>
+        <div ng-class="{
+          'has-error': $ctrl.newForm.body.$invalid &&
+            $ctrl.newForm.body.$touched,
+          'has-success': $ctrl.newForm.body.$valid,
+        }">
           <label for="body">Body</label>
-          <textarea id="body" class="form-control" ng-model="$ctrl.newPost.body"></textarea>
+          <textarea id="body" name="body" class="form-control" required ng-minlength="10" ng-model="$ctrl.newPost.body"></textarea>
         </div>
-        <div>
+        <div ng-class="{
+          'has-error': $ctrl.newForm.author.$invalid &&
+            $ctrl.newForm.author.$touched,
+          'has-success': $ctrl.newForm.author.$valid,
+        }">
           <label for="author">Author</label>
-          <input id="author" class="form-control" ng-model="$ctrl.newPost.author">
+          <input id="author" name="author" class="form-control" required ng-minlength="3" ng-model="$ctrl.newPost.author">
         </div>
-        <div>
+        <div ng-class="{
+          'has-error': $ctrl.newForm.imageUrl.$invalid &&
+            $ctrl.newForm.imageUrl.$touched,
+          'has-success': $ctrl.newForm.imageUrl.$valid,
+        }">
           <label for="image-url">Image URL</label>
-          <input id="image-url" class="form-control" ng-model="$ctrl.newPost.imgUrl">
+          <input id="imageUrl" name="imageUrl" type="url" class="form-control" required ng-minlength="3" ng-model="$ctrl.newPost.imgUrl">
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.newForm.$invalid">
             Create Post
           </button>
         </div>
@@ -66,11 +82,11 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12" ng-repeat="post in $ctrl.posts | orderBy:$ctrl.sort">
+    <div class="col-md-12" ng-repeat="post in $ctrl.posts | filter:$ctrl.filter | orderBy:$ctrl.sort:true">
 
-      <div class="well">
+      <div class="well post">
         <div class="media-left">
-          <img class="media-object" src="{{post.imgUrl}}">
+          <img class="media-object" ng-src="{{post.imgUrl}}">
         </div>
         <div class="media-body">
           <h4 class="media-heading">
@@ -87,7 +103,7 @@
             {{post.body}}
           </p>
           <div>
-            {{post.posted | date: 'MMM d, y, HH:mm a' }}
+            {{post.posted | date: 'MMM d, y, HH:mm:ss a' }}
             |
             <i class="glyphicon glyphicon-comment"></i>
             <a ng-click="showComments=!showComments">
