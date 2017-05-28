@@ -3,8 +3,12 @@ const router = express.Router()
 const knex = require('../db')
 
 router.get('/', (req, res, next) => {
+  console.log('start get route');
   knex('expenses')
-    .then(expenses => res.json(expenses))
+    .then(expenses => {
+      console.log('through knex');
+      res.json(expenses)
+    })
     .catch(err => next(err))
 })
 
