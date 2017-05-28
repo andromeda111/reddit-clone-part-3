@@ -1,1 +1,49 @@
-<p>test</p>
+<h1>Expenses</h1>
+
+<!-- Add Expenses -->
+<form ng-submit="$ctrl.addExpense()">
+  <p>
+    Category: <input id="new-category" ng-model="$ctrl.expense.category">
+  </p>
+  <p>
+    Amount: <input id="new-amount" type="number" step=".01" placeholder='0.00' ng-model="$ctrl.expense.amount">
+  </p>
+  <p>
+    <button type="submit">Add Expense</button>
+  </p>
+</form>
+
+<!-- Expenses List -->
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Category</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="data in $ctrl.expenseList">
+      <td>{{ data.id }}</td>
+      <td>{{ data.category }}</td>
+      <td>{{ data.amount }}</td>
+      <td>
+        <a href="" ng-click="$ctrl.editToggle = !$ctrl.editToggle">edit</a>
+        <a href="#">delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Edit Form -->
+<form ng-submit="$ctrl.editExpense()" ng-if="$ctrl.editToggle">
+  <p>
+    Category: <input id="edit-category" ng-model="$ctrl.expense.category">
+  </p>
+  <p>
+    Amount: <input id="edit-amount" type="number" step=".01" placeholder='0.00' ng-model="$ctrl.expense.amount">
+  </p>
+  <p>
+    <button type="submit">Update Expense</button>
+  </p>
+</form>

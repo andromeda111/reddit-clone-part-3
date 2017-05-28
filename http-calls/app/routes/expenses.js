@@ -13,6 +13,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
+  console.log('getting to post');
   knex('expenses')
     .insert({category: req.body.category, amount: req.body.amount})
     .returning('*')
