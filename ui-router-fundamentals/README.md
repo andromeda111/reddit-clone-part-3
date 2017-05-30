@@ -14,7 +14,7 @@ Create an Angular application that allows a user to navigate between different r
   - They see the house listed
 - X When a user clicks on a house, then:
   - The URL should be `/houses/4` (where `4` is the house id)
-- When a user visits `/houses/4` then
+- X When a user visits `/houses/4` then
   - They should see the house address
   - They should be able to return to the homepage
 
