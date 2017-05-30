@@ -1,4 +1,6 @@
-console.log('getting app.js angular');
+(function() {
+  'use strict'
+
 angular.module('app', [])
   .component('reddit', {
     controller: function () {
@@ -39,3 +41,5 @@ angular.module('app', [])
 
     templateUrl: 'main.html'
   })
+
+})();
