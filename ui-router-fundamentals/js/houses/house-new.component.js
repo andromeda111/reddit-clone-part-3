@@ -12,7 +12,12 @@
 
         vm.addHouse = function () {
           houseService.addHouse(vm.house)
+
           // TODO: go to the appropriate URL here
+
+          let newHouseId = vm.houses.length-1
+          newHouseId = vm.houses[newHouseId].id
+          $state.go('houseShow', { 'houseId': newHouseId })
         }
       },
       template: `
@@ -29,6 +34,8 @@
             <button type="submit">Create House</button>
           </p>
         </form>
+
+        <a ui-sref="houseList">Return Home</a>
       `
     })
 

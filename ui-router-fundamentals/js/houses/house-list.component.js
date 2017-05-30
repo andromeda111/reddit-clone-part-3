@@ -16,11 +16,13 @@
         <ul>
           <li ng-repeat="house in $ctrl.houses">
             <!-- TODO: add link here -->
+            <a ng-model="house" ui-sref="houseShow({ houseId: house.id })">{{house.name}}</a> | {{house.address}}
           </li>
         </ul>
 
         <!-- TODO: add link here -->
+        <a ui-sref="houseNew">Add New House</a>
       `
     })
 
-}());
+})();

@@ -6,13 +6,13 @@ Create an Angular application that allows a user to navigate between different r
 
 ## Requirements
 
-- When a user clicks on "Add House" then:
+- X When a user clicks on "Add House" then:
   - The URL should be `/houses/new`
-- When a user clicks "Create House" then:
+- X When a user clicks "Create House" then:
   - They should be redirected to `/houses/1` (where `1` is whatever the house id is)
-- When a user visits the homepage then
+- X When a user visits the homepage then
   - They see the house listed
-- When a user clicks on a house, then:
+- X When a user clicks on a house, then:
   - The URL should be `/houses/4` (where `4` is the house id)
 - When a user visits `/houses/4` then
   - They should see the house address
