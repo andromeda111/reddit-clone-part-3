@@ -3,19 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title>Reddit Clone</title>
+    <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/app.css">
-    <script defer src="/angular/angular.min.js"></script>
+    <script defer src="/angular/angular.js"></script>
+    <script defer src="/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- JS -->
     <script defer type="text/javascript" src="js/app.module.js"></script>
     <script defer type="text/javascript" src="js/app.config.js"></script>
     <script defer type="text/javascript" src="js/reddit/reddit-home.component.js"></script>
+    <script defer type="text/javascript" src="js/reddit/reddit-edit.component.js"></script>
   </head>
   <body>
 
-    <reddit></reddit>
+    <ui-view></ui-view>
 
   </body>
 </html>

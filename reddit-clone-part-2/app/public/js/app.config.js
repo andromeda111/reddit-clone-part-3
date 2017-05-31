@@ -13,7 +13,12 @@
       .state({
         name: 'home',
         url: '/',
-        component: 'home',
+        component: 'reddit',
+      })
+      .state({
+        name: 'edit',
+        url: '/posts/{postId}',
+        component: 'edit',
       })
   }
 

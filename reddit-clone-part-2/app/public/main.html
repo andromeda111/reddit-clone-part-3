@@ -28,7 +28,7 @@
     <div class="form-inline">
       <label for="sort">  Sort by </label>
       <select class="form-control" id="sort" ng-model="$ctrl.sort">
-        <option value="votes">Votes</option>
+        <option value="vote_count">Votes</option>
         <option value="posted">Date</option>
         <option value="title">Title</option>
       </select>
@@ -69,7 +69,7 @@
           'has-success': $ctrl.newForm.imageUrl.$valid,
         }">
           <label for="image-url">Image URL</label>
-          <input id="imageUrl" name="imageUrl" type="url" class="form-control" required ng-minlength="3" ng-model="$ctrl.newPost.imgUrl">
+          <input id="imageUrl" name="imageUrl" type="url" class="form-control" required ng-minlength="3" ng-model="$ctrl.newPost.image_url">
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.newForm.$invalid">
@@ -86,7 +86,8 @@
 
       <div class="well post">
         <div class="media-left">
-          <img class="media-object" ng-src="{{post.imgUrl}}">
+          <img class="media-object" ng-src="{{post.image_url}}">
+          <a ui-sref="edit({postId: post.id})">Edit</a>
         </div>
         <div class="media-body">
           <h4 class="media-heading">
@@ -94,7 +95,7 @@
             |
             <a ng-click="$ctrl.voteUp(post)"><i class="glyphicon glyphicon-arrow-up"></i></a>
             <a ng-click="$ctrl.voteDown(post)"><i class="glyphicon glyphicon-arrow-down"></i></a>
-            {{post.votes}}
+            {{post.vote_count}}
           </h4>
           <div class="text-right">
             {{post.author}}
@@ -103,7 +104,7 @@
             {{post.body}}
           </p>
           <div>
-            {{post.posted | date: 'MMM d, y, HH:mm:ss a' }}
+            {{post.created_at | date: 'MMM d, y, HH:mm:ss a' }}
             |
             <i class="glyphicon glyphicon-comment"></i>
             <a ng-click="showComments=!showComments">
@@ -115,13 +116,13 @@
               <hr>
               <div ng-repeat="comment in post.comments">
                 <p>
-                  {{comment.text}}
+                  {{comment.content}}
                 </p>
                 <hr>
               </div>
               <form class="form-inline" ng-submit="$ctrl.addComment(post)">
                 <div class="form-group">
-                  <input class="form-control" ng-model="post.comment.text">
+                  <input class="form-control" ng-model="post.comment.content">
                 </div>
                 <div class="form-group">
                   <input type="submit" class="btn btn-primary">
